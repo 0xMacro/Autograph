@@ -7,4 +7,4 @@ deploy-subscriptions: loadenv
 	forge create src/Subscriptions.sol:Subscriptions --keystore $ETH_KEYSTORE --rpc-url $ETH_RPC_URL --etherscan-api-key $ETHERSCAN_API_KEY
 
 loadenv:
-	source .env
+	. .env
