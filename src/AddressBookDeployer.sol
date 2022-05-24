@@ -7,7 +7,6 @@ import "./AddressBook.sol";
 
 contract AddressBookDeployer is IAddressBookDeployer {
     struct Parameters {
-        address factory;
         address owner;
     }
 
@@ -16,14 +15,13 @@ contract AddressBookDeployer is IAddressBookDeployer {
 
     /// @dev Deploys an address book with the given parameters by transiently setting the parameters storage slot and then
     /// clearing it after deploying the address book.
-    /// @param factory The contract address of the Address Book factory
     /// @param owner The owner of the address book
-    function deploy(
-        address factory,
-        address owner,
-        uint256 index
-    ) internal returns (address book) {
-        parameters = Parameters({factory: factory, owner: owner});
+    /// @param index The index of the address book
+    function deploy(address owner, uint256 index)
+        internal
+        returns (address book)
+    {
+        parameters = Parameters({owner: owner});
         book = address(
             new AddressBook{salt: keccak256(abi.encode(owner, index))}()
         );

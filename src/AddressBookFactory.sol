@@ -14,7 +14,7 @@ contract AddressBookFactory is IAddressBookFactory, AddressBookDeployer {
     function createAddressBook() external returns (address book) {
         address owner = msg.sender;
         uint256 index = getAddressBook[msg.sender].length;
-        book = deploy(address(this), owner, index);
+        book = deploy(owner, index);
         getAddressBook[owner].push(book);
         emit AddressBookCreated(owner, index, book);
     }
