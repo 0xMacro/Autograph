@@ -8,10 +8,10 @@ import SubscriptionsAbi from "./abis/Subscriptions.json";
 const abis = {
   erc20: erc20Abi,
   ownable: ownableAbi,
-  AddressBook: AddressBookAbi,
-  AddressBookDepolyer: AddressBookDepolyerAbi,
-  AddressBookFactory: AddressBookFactoryAbi,
-  Subscriptions: SubscriptionsAbi,
+  AddressBook: AddressBookAbi.abi,
+  AddressBookDepolyer: AddressBookDepolyerAbi.abi,
+  AddressBookFactory: AddressBookFactoryAbi.abi,
+  Subscriptions: SubscriptionsAbi.abi,
 };
 
 export default abis;

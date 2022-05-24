@@ -3,7 +3,7 @@ import { Contract } from "@ethersproject/contracts";
 import { shortenAddress, useCall, useEthers, useLookupAddress } from "@usedapp/core";
 import React, { useEffect, useState } from "react";
 
-import { Body, Button, Container, Header, Image, Link } from "./components";
+import { Body, Button, Container, Header, Image, Link, Subscription } from "./components";
 import logo from "./ethereumLogo.png";
 
 import { addresses, abis } from "@my-app/contracts";
@@ -47,14 +47,29 @@ function WalletButton() {
   );
 }
 
+function Subscriptions() {
+  const exampleSubsciption = '0xdeadbeef'
+  return (
+    <Subscription>
+      <div>></div>
+      exampleSubsciption
+    </Subscription>
+  )
+}
+
 function App() {
+  const { account } = useEthers();
+
   // Read more about useDapp on https://usedapp.io/
-  const { error: contractCallError, value: tokenBalance } =
-    useCall({
-       contract: new Contract(addresses.ceaErc20, abis.erc20),
-       method: "balanceOf",
-       args: ["0x3f8CB69d9c0ED01923F11c829BaE4D9a4CB6c82C"],
-    }) ?? {};
+    // const { error: contractCallError, value: subscriptions } =
+    // useCall({
+    //   contract: new Contract(addresses.Subscriptions, abis.Subscriptions),
+    //   method: "subscriptions",
+    //   args: [account, 0],
+    // }) ?? {}
+
+
+  //   console.log(contractCallError, tokenBalance)
 
   // const { loading, error: subgraphQueryError, data } = useQuery(GET_TRANSFERS);
 
@@ -68,13 +83,25 @@ function App() {
   //   }
   // }, [loading, subgraphQueryError, data]);
 
+  const exampleList = [
+    {
+      name: 'test contract',
+      tipology: 1, //contract
+      entryAddress: '0x123abc',
+      labels: ['test', 'goerli', 'dank']
+    },
+  ]
+
+
   return (
     <Container>
       <Header>
         <WalletButton />
       </Header>
       <Body>
-        <Image src={logo} alt="ethereum-logo" />
+        <Subscriptions />
+
+        {/* <Image src={logo} alt="ethereum-logo" />
         <p>
           Edit <code>packages/react-app/src/App.js</code> and save to reload.
         </p>
@@ -82,7 +109,7 @@ function App() {
           Learn React
         </Link>
         <Link href="https://usedapp.io/">Learn useDapp</Link>
-        <Link href="https://thegraph.com/docs/quick-start">Learn The Graph</Link>
+        <Link href="https://thegraph.com/docs/quick-start">Learn The Graph</Link> */}
       </Body>
     </Container>
   );

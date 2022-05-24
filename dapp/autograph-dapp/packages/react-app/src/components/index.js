@@ -53,3 +53,13 @@ export const Link = styled.a.attrs({
   color: #61dafb;
   margin-top: 8px;
 `;
+
+export const Subscription = styled.div`
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 90vw;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`
