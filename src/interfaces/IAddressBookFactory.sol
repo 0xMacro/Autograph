@@ -3,6 +3,8 @@ pragma solidity ^0.8.13;
 
 /// @title The interface for the Address Book Factory
 /// @notice The Address Book Factory facilitates creation of Address Books
+/// Heavily inspired by IUniswapV3Factory.sol
+/// @author Vincenzo Ferrara (vinceferro)
 interface IAddressBookFactory {
     /// @notice Emitted when an address book is created
     /// @param owner The owner of the address book

@@ -5,6 +5,8 @@ import "./interfaces/IAddressBookDeployer.sol";
 
 import "./AddressBook.sol";
 
+/// @title Address Book Deployer
+/// @author Vincenzo Ferrara (vinceferro)
 contract AddressBookDeployer is IAddressBookDeployer {
     struct Parameters {
         address owner;

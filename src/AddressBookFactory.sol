@@ -4,6 +4,8 @@ pragma solidity ^0.8.13;
 import "./interfaces/IAddressBookFactory.sol";
 import "./AddressBookDeployer.sol";
 
+/// @title Address Book Factory
+/// @author Vincenzo Ferrara (vinceferro)
 contract AddressBookFactory is IAddressBookFactory, AddressBookDeployer {
     constructor() {}
 
