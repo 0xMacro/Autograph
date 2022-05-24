@@ -51,15 +51,36 @@ export const Link = styled.a.attrs({
   rel: "noopener noreferrer",
 })`
   color: #61dafb;
-  margin-top: 8px;
+  text-decoration: underline;
 `;
 
 export const Subscription = styled.div`
+  display: flex;
+  justify-content: space-between;
+  `
+export const SubscriptionContainer = styled.div`
   border: 1px solid white;
   border-radius: 10px;
   width: 90vw;
   max-width: 900px;
+  padding: 10px;
+`
+export const ListContainer = styled.div`
+  margin: 10px 10px 10px 50px;
+`
+export const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  margin: 10px 10px 10px 50px;
+`
+export const ListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  `
+export const Flex = styled.div`
+  display: flex;
+`
+
+export const Label = styled.div`
+  padding-right: 15px;
 `

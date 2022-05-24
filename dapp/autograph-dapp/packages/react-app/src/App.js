@@ -3,7 +3,7 @@ import { Contract } from "@ethersproject/contracts";
 import { shortenAddress, useCall, useEthers, useLookupAddress } from "@usedapp/core";
 import React, { useEffect, useState } from "react";
 
-import { Body, Button, Container, Header, Image, Link, Subscription } from "./components";
+import { Body, Button, Container, Header, Image, Link, Subscription, Flex, SubscriptionContainer, ListContainer, ListItem, Label, ListHeader} from "./components";
 import logo from "./ethereumLogo.png";
 
 import { addresses, abis } from "@my-app/contracts";
@@ -48,12 +48,48 @@ function WalletButton() {
 }
 
 function Subscriptions() {
-  const exampleSubsciption = '0xdeadbeef'
+  const exampleSubsciptions = ['0xdeadbeef']
+  const exampleList = [
+    {
+      name: 'test contract',
+      tipology: 1, //contract
+      entryAddress: '0x123abc',
+      labels: ['test', 'goerli', 'dank']
+    },
+  ]
+
+  const [expand, setExpand] = useState(true)
+
   return (
-    <Subscription>
-      <div>></div>
-      exampleSubsciption
-    </Subscription>
+    exampleSubsciptions.map((subscription, i) => (
+      <SubscriptionContainer key={subscription}>
+        <Subscription onClick={() => setExpand(!expand)}>{subscription}</Subscription>
+        {expand && exampleList.length > 0 ? 
+          <>
+          {/* <ListHeader>
+            <div>contract name:</div>
+            <div>type:</div>
+            <div>address:</div>
+            <div>labels:</div>
+          </ListHeader> */}
+          <ListContainer>
+            {exampleList.map((list) => (
+              <ListItem key={subscription + list}>
+                <div>{list.name}</div>
+                {/* <div>{list.tipology == 0 ? 'EOA' : 'Contract'}</div> */}
+                <Link href={`https://goerli.etherscan.io/address/${list.entryAddress}`}>{list.entryAddress.slice(0,5) + '...' + list.entryAddress.slice(-3)}</Link>
+                <Flex>{list.labels.map((label, i) => (  
+                  <Label key={subscription + list + label}>{label}</Label>
+                  ))}</Flex>
+              </ListItem>
+            ))}
+          </ListContainer>
+          </>
+          :
+          <></>
+        }
+      </SubscriptionContainer>
+    ))
   )
 }
 
