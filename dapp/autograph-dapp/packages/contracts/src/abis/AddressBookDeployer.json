@@ -1,0 +1,27 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "parameters",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b5060ab8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638903573014602d575b600080fd5b600054604c9073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f3fea2646970667358221220db70ab02097f06fc9d8977410bcb46038a10042c0b0e989cdb610dae48eafa4864736f6c634300080d0033",
+    "sourceMap": "218:768:1:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638903573014602d575b600080fd5b600054604c9073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f3fea2646970667358221220db70ab02097f06fc9d8977410bcb46038a10042c0b0e989cdb610dae48eafa4864736f6c634300080d0033",
+    "sourceMap": "218:768:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;372:37;;;;;;;;;;;;190:42:8;178:55;;;160:74;;148:2;133:18;372:37:1;;;;;;",
+    "linkReferences": {}
+  }
+}
