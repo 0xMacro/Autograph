@@ -15,7 +15,12 @@ interface IAddressBooksToggle {
   [key: number]: boolean;
 }
 
-type getEntriesOutput = [string, number, string, string[]][]
+type getEntriesOutput = [string, number, string, string[]] & {
+  name: string;
+  tipology: number;
+  entryAddress: string;
+  labels: string[];
+};
 
 interface IAddressBooksEntries {
   [key: number]: getEntriesOutput[];
@@ -40,11 +45,12 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
       
     }
 
-    function handleItemClick (addressBook: string, i: number) {
+    async function handleItemClick (addressBook: string, i: number) {
       let copy:IAddressBooksToggle = {...toggleAddressBook}
+      await getEntries(addressBook, i)
       copy[i] = !copy[i]
       setAddressBooksToggle(copy)
-      getEntries(addressBook, i)
+      console.log(addressBooksToggle)
     }
     
     async function getEntries (addressBook: string, i: number) {
@@ -69,10 +75,10 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
                 <ListItem key={'entry' + i}>
                   <div>{list[0]}</div>
                   {/* <div>{list.tipology == 0 ? 'EOA' : 'Contract'}</div> */}
-                  <Link href={`https://goerli.etherscan.io/address/${list[1]}`}>{list[1].slice(0,5) + '...' + list[1].slice(-3)}</Link>
-                  <Flex>{list[2].map((label:string, i:number) => (  
+                  <Link href={`https://goerli.etherscan.io/address/${list[1]}`}>{list[1].toString().slice(0,5) + '...' + list[1].toString().slice(-3)}</Link>
+                  {/* <Flex>{list[2].map((label:string) => (  
                     <Label key={'entry' + `${i ,label}`}>{label}</Label>
-                    ))}</Flex>
+                    ))}</Flex> */}
                 </ListItem>
               ))}
             </ListContainer>
