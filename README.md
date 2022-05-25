@@ -2,6 +2,20 @@
 
 The autograph is a simple address book contract that allows you to manage address books of your favorites addresses.
 
+
+
+V2
+AutographAddressBook
+Deployer: 0xfc5e9ba650550de8be9a0f995ee9bf2d530cddbe
+Deployed to: [0x819110f8e51d2b45dd4c380b0c962088cbcf5ed0](https://goerli.etherscan.io/address/0x819110f8e51d2b45dd4c380b0c962088cbcf5ed0)
+Transaction hash: [0xd05cc9da853c054b4702faf0099fffc505d0c4d414b30627143f52b693ff22c6](https://goerli.etherscan.io/tx/0xd05cc9da853c054b4702faf0099fffc505d0c4d414b30627143f52b693ff22c6)
+
+Subscriptions
+Deployer: 0xfc5e9ba650550de8be9a0f995ee9bf2d530cddbe
+Deployed to: [0x13dac3c9916898e0c642b7bb54a8cedc80b9b570](https://goerli.etherscan.io/address/0x13dac3c9916898e0c642b7bb54a8cedc80b9b570)
+Transaction hash: [0x89225643ad95908eafe40944c8fa85bb43c0ded771acda053f17dc79954e6e11](https://goerli.etherscan.io/tx/0x89225643ad95908eafe40944c8fa85bb43c0ded771acda053f17dc79954e6e11)
+
+V1
 AutographAddressBook
 Deployer: 0xfc5e9ba650550de8be9a0f995ee9bf2d530cddbe
 Deployed to: [0x3298a5e7e7c570911bf59410dc4bce8095f93df8](https://goerli.etherscan.io/address/0x3298a5e7e7c570911bf59410dc4bce8095f93df8)

@@ -30,6 +30,7 @@ export interface AddressBookFactoryInterface extends utils.Interface {
   functions: {
     "createAddressBook()": FunctionFragment;
     "getAddressBook(address,uint256)": FunctionFragment;
+    "getAddressBooksByOwner(address)": FunctionFragment;
     "parameters()": FunctionFragment;
   };
 
@@ -37,6 +38,7 @@ export interface AddressBookFactoryInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "createAddressBook"
       | "getAddressBook"
+      | "getAddressBooksByOwner"
       | "parameters"
   ): FunctionFragment;
 
@@ -49,6 +51,10 @@ export interface AddressBookFactoryInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "getAddressBooksByOwner",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "parameters",
     values?: undefined
   ): string;
@@ -59,6 +65,10 @@ export interface AddressBookFactoryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getAddressBook",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAddressBooksByOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "parameters", data: BytesLike): Result;
@@ -120,6 +130,11 @@ export interface AddressBookFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getAddressBooksByOwner(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<[string[]]>;
+
     parameters(
       overrides?: CallOverrides
     ): Promise<[string] & { owner: string }>;
@@ -135,6 +150,11 @@ export interface AddressBookFactory extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getAddressBooksByOwner(
+    owner: string,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
   parameters(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
@@ -145,6 +165,11 @@ export interface AddressBookFactory extends BaseContract {
       arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getAddressBooksByOwner(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
 
     parameters(overrides?: CallOverrides): Promise<string>;
   };
@@ -173,6 +198,11 @@ export interface AddressBookFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getAddressBooksByOwner(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     parameters(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -184,6 +214,11 @@ export interface AddressBookFactory extends BaseContract {
     getAddressBook(
       arg0: string,
       arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getAddressBooksByOwner(
+      owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

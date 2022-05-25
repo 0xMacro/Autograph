@@ -44,6 +44,14 @@ contract Subscriptions {
         emit Unsubscribed(msg.sender, book);
     }
 
+    function getSubscriptions(address owner)
+        public
+        view
+        returns (address[] memory)
+    {
+        return subscriptions[owner];
+    }
+
     /// @notice Returns the index of the given address book in the subscriptions array
     /// @param book The address of the address book to search for
     /// @return index The index of the address book in the subscriptions array

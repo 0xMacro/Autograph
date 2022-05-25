@@ -12,6 +12,14 @@ contract AddressBookFactory is IAddressBookFactory, AddressBookDeployer {
     /// @inheritdoc IAddressBookFactory
     mapping(address => address[]) public override getAddressBook;
 
+    function getAddressBooksByOwner(address owner)
+        public
+        view
+        returns (address[] memory)
+    {
+        return getAddressBook[owner];
+    }
+
     /// @inheritdoc IAddressBookFactory
     function createAddressBook() external returns (address book) {
         address owner = msg.sender;

@@ -20,9 +20,18 @@ interface IAddressBookFactory {
     /// @return book The address of the newly created address book
     function createAddressBook() external returns (address book);
 
+    /// @notice Returns all address books by owner
+    /// @param owner The address of the owner of the address book
+    /// @return books The array of address books owned by the owner
+    function getAddressBooksByOwner(address owner)
+        external
+        view
+        returns (address[] memory books);
+
     /// @notice Returns the address book address for a given owner and an index, 0 if it is out of bound
     /// @param owner The address of the owner of the address book
     /// @param index The index of the address book
+    /// @return book The address of the address book at the index
     function getAddressBook(address owner, uint256 index)
         external
         view

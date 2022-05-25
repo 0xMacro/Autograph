@@ -29,6 +29,7 @@ import type {
 export interface SubscriptionsInterface extends utils.Interface {
   functions: {
     "_indexOf(address)": FunctionFragment;
+    "getSubscriptions(address)": FunctionFragment;
     "subscribe(address)": FunctionFragment;
     "subscriptions(address,uint256)": FunctionFragment;
     "unsubscribe(address)": FunctionFragment;
@@ -37,12 +38,17 @@ export interface SubscriptionsInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "_indexOf"
+      | "getSubscriptions"
       | "subscribe"
       | "subscriptions"
       | "unsubscribe"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "_indexOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "getSubscriptions",
+    values: [string]
+  ): string;
   encodeFunctionData(functionFragment: "subscribe", values: [string]): string;
   encodeFunctionData(
     functionFragment: "subscriptions",
@@ -51,6 +57,10 @@ export interface SubscriptionsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "unsubscribe", values: [string]): string;
 
   decodeFunctionResult(functionFragment: "_indexOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getSubscriptions",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "subscribe", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "subscriptions",
@@ -124,6 +134,11 @@ export interface Subscriptions extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, boolean]>;
 
+    getSubscriptions(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<[string[]]>;
+
     subscribe(
       book: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -146,6 +161,8 @@ export interface Subscriptions extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[BigNumber, boolean]>;
 
+  getSubscriptions(owner: string, overrides?: CallOverrides): Promise<string[]>;
+
   subscribe(
     book: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -167,6 +184,11 @@ export interface Subscriptions extends BaseContract {
       book: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber, boolean]>;
+
+    getSubscriptions(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
 
     subscribe(book: string, overrides?: CallOverrides): Promise<void>;
 
@@ -202,6 +224,11 @@ export interface Subscriptions extends BaseContract {
   estimateGas: {
     _indexOf(book: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    getSubscriptions(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     subscribe(
       book: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -222,6 +249,11 @@ export interface Subscriptions extends BaseContract {
   populateTransaction: {
     _indexOf(
       book: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getSubscriptions(
+      owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

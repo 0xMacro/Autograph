@@ -18,7 +18,7 @@
     "react-app:ipfs": "yarn workspace @my-app/react-app ipfs",
     "react-app:start": "yarn workspace @my-app/react-app start",
     "react-app:test": "yarn workspace @my-app/react-app test",
-    "contracts:generate": "yarn workspace @my-app/contracts generate"
+    "react-app:generate": "yarn workspace @my-app/react-app generate"
   },
   "workspaces": {
     "packages": [

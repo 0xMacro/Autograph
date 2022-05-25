@@ -1,7 +1,6 @@
 import "./index.css";
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { DAppProvider, Mainnet, Goerli } from "@usedapp/core";
+import { DAppProvider, Goerli } from "@usedapp/core";
 import React from "react";
 import ReactDOM from "react-dom";
 
