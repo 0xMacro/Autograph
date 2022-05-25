@@ -23,7 +23,7 @@ const App = () => {
       </Header>
       <Body>
         <AddressBookForm IAddressBookFactory={IAddressBookFactory} />
-        <AddressBookList IAddressBookFactory={IAddressBookFactory} />
+        <AddressBookList IAddressBookFactory={IAddressBookFactory} library={library} chainId={chainId}/>
         <Subscriptions ISubscriptions={ISubscriptions}  />
       </Body>
     </Container>
