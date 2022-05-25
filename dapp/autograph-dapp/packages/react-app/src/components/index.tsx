@@ -36,7 +36,7 @@ export const Header = styled.header`
   color: white;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 70px;
 `;
 
@@ -92,6 +92,11 @@ export const Label = styled.div`
 `
 
 export const Input = styled.input`
+`
+
+export const Title = styled.h1`
+  text-align: left;
+  padding: 12px 24px;
 `
 
 export const Indent = styled.div`

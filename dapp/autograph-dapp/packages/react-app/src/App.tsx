@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Body, Container, Header} from "./components";
+import { Body, Container, Header, Title} from "./components";
 import WalletButton from "./components/WalletButton";
 import Subscriptions from "./components/Subscriptions";
 import logo from "./ethereumLogo.png";
@@ -19,6 +19,7 @@ const App = () => {
   return (
     <Container>
       <Header>
+        <Title>Autograph</Title>
         <WalletButton />
       </Header>
       <Body>
