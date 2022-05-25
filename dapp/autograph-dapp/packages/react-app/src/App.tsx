@@ -1,12 +1,12 @@
 // import { useQuery } from "@apollo/client";
 import { Contract } from "@ethersproject/contracts";
 import { shortenAddress, useCall, useEthers, useLookupAddress } from "@usedapp/core";
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 
 import { Body, Button, Container, Header, Image, Link, Subscription, Flex, SubscriptionContainer, ListContainer, ListItem, Label, ListHeader} from "./components";
 import logo from "./ethereumLogo.png";
 
-import { addresses, abis } from "@my-app/contracts";
+import { AddressBookFactory } from "@my-app/contracts/types/ethers-contracts";
 // import GET_TRANSFERS from "./graphql/subgraph";
 
 function WalletButton() {
@@ -47,7 +47,7 @@ function WalletButton() {
   );
 }
 
-function Subscriptions() {
+const Subscriptions = ({}) => {
   const exampleSubsciptions = ['0xdeadbeef']
   const exampleList = [
     {
@@ -61,6 +61,7 @@ function Subscriptions() {
   const [expand, setExpand] = useState(true)
 
   return (
+    <>{
     exampleSubsciptions.map((subscription, i) => (
       <SubscriptionContainer key={subscription}>
         <Subscription onClick={() => setExpand(!expand)}>{subscription}</Subscription>
@@ -90,6 +91,7 @@ function Subscriptions() {
         }
       </SubscriptionContainer>
     ))
+  }</>
   )
 }
 
