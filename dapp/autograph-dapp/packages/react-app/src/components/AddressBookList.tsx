@@ -26,6 +26,8 @@ interface IAddressBooksEntries {
   [key: number]: getEntriesOutput[];
 }
 
+const flexGrowStyle = {flexGrow: 1, flexBasis: 0}
+
 
 const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookListProps) => {
     const [addressBooks, setAddressBooks] = useState<string[]>([]);
@@ -73,10 +75,10 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
               <ListContainer>
               {addressBooksEntries[i].map((list) => (
                 <ListItem key={'entry' + i}>
-                  <div>{list[0]}</div>
+                  <div style={flexGrowStyle}>{list[0]}</div>
                   {/* <div>{list.tipology == 0 ? 'EOA' : 'Contract'}</div> */}
                   <Link href={`https://goerli.etherscan.io/address/${list[2]}`}>{list[2].toString().slice(0,6) + '...' + list[2].toString().slice(-4)}</Link>
-                  <Flex>{list[3].map((label:string, i:number) => (  
+                  <Flex style={{...flexGrowStyle, justifyContent: 'right'}}>{list[3].map((label:string, i:number) => (  
                     <Label key={'entry' + `${i}${label}`}>{label}</Label>
                     ))}</Flex>
                 </ListItem>
