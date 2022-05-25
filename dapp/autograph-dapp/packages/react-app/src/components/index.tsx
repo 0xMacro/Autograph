@@ -54,11 +54,11 @@ export const Link = styled.a.attrs({
   text-decoration: underline;
 `;
 
-export const Subscription = styled.div`
+export const Item = styled.div`
   display: flex;
   justify-content: space-between;
   `
-export const SubscriptionContainer = styled.div`
+export const ItemContainer = styled.div`
   border: 1px solid white;
   border-radius: 10px;
   width: 90vw;
@@ -83,4 +83,7 @@ export const Flex = styled.div`
 
 export const Label = styled.div`
   padding-right: 15px;
+`
+
+export const Input = styled.input`
 `
