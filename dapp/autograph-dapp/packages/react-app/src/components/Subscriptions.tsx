@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useEthers } from '@usedapp/core';
-import { Subscription, SubscriptionContainer } from ".";
+import { Item, ItemContainer } from ".";
 import { Subscriptions as SubscriptionsContract } from '../types';
 
 
@@ -23,9 +23,9 @@ const Subscriptions = ({ISubscriptions}: SubscriptionsProps) => {
     return (
       <>{
       subscriptions.map((subscription, i) => (
-        <SubscriptionContainer key={subscription}>
-          <Subscription>{subscription}</Subscription>
-        </SubscriptionContainer>
+        <ItemContainer key={subscription}>
+          <Item>{subscription}</Item>
+        </ItemContainer>
       ))
     }</>
     )

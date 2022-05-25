@@ -6,19 +6,24 @@ import Subscriptions from "./components/Subscriptions";
 import logo from "./ethereumLogo.png";
 import { useEthers } from "@usedapp/core";
 import { AddressBookFactory__factory, Subscriptions__factory } from "./types";
-import { SUBSCRIPTIONS_ADDRESSES } from "./constants";
+import { ADDRESS_BOOK_FACTORY_ADDRESSES, SUBSCRIPTIONS_ADDRESSES } from "./constants";
+import AddressBookForm from "./components/AddressBookForm";
+import AddressBookList from "./components/AddressBookList";
 // import GET_TRANSFERS from "./graphql/subgraph";
 
 const App = () => {
   const { library, chainId } = useEthers();
   // const IAddressBook = AddressBookFactory__factory.connect(ADDRESS_BOOK_FACTORY_ADDRESSES[chainId!]!, library!);
   const ISubscriptions = Subscriptions__factory.connect(SUBSCRIPTIONS_ADDRESSES[chainId!]!, library!);
+  const IAddressBookFactory = AddressBookFactory__factory.connect(ADDRESS_BOOK_FACTORY_ADDRESSES[chainId!]!, library!);
   return (
     <Container>
       <Header>
         <WalletButton />
       </Header>
       <Body>
+        <AddressBookForm IAddressBookFactory={IAddressBookFactory} />
+        <AddressBookList IAddressBookFactory={IAddressBookFactory} />
         <Subscriptions ISubscriptions={ISubscriptions}  />
       </Body>
     </Container>
