@@ -64,6 +64,7 @@ export const ItemContainer = styled.div`
   width: 90vw;
   max-width: 900px;
   padding: 10px;
+  margin-top: 20px;
 `
 export const ListContainer = styled.div`
   margin: 10px 10px 10px 50px;

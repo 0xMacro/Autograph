@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import Entries from './Entries';
 import { useEthers } from '@usedapp/core';
-import { ItemContainer, Item, ListContainer, ListItem, Link, Flex, Label } from ".";
-import { AddressBookFactory, AddressBook, AddressBook__factory, } from '../types';
+import { ItemContainer, Item } from ".";
+import { AddressBookFactory, AddressBook__factory, } from '../types';
 
 
 
@@ -26,7 +27,7 @@ interface IAddressBooksEntries {
   [key: number]: getEntriesOutput[];
 }
 
-const flexGrowStyle = {flexGrow: 1, flexBasis: 0}
+
 
 
 const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookListProps) => {
@@ -36,8 +37,6 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
     const { account } = useEthers();
 
     useEffect(() => {
-        console.log(`AddressBookList.tsx: useEffect: account: ${account}`);
-
         if (!account) return;
         IAddressBookFactory.getAddressBooksByOwner(account).then(setAddressBooks);
 
@@ -52,12 +51,10 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
       await getEntries(addressBook, i)
       copy[i] = !copy[i]
       setAddressBooksToggle(copy)
-      console.log(addressBooksToggle)
     }
     
     async function getEntries (addressBook: string, i: number) {
       const IAddressBook = AddressBook__factory.connect(addressBook, library!);
-      console.log('meow: ',IAddressBook)
       const entries:getEntriesOutput[] = await IAddressBook.getEntries()
       let copy:IAddressBooksEntries = {...addressBooksEntries}
       copy[i] = entries
@@ -72,18 +69,7 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
             <Item onClick={() => {handleItemClick(addressBook, i)}}>{addressBook}</Item>
             {
               addressBooksToggle[i] ?
-              <ListContainer>
-              {addressBooksEntries[i].map((list) => (
-                <ListItem key={'entry' + i}>
-                  <div style={flexGrowStyle}>{list[0]}</div>
-                  {/* <div>{list.tipology == 0 ? 'EOA' : 'Contract'}</div> */}
-                  <Link href={`https://goerli.etherscan.io/address/${list[2]}`}>{list[2].toString().slice(0,6) + '...' + list[2].toString().slice(-4)}</Link>
-                  <Flex style={{...flexGrowStyle, justifyContent: 'right'}}>{list[3].map((label:string, i:number) => (  
-                    <Label key={'entry' + `${i}${label}`}>{label}</Label>
-                    ))}</Flex>
-                </ListItem>
-              ))}
-            </ListContainer>
+              <Entries addressBooksEntries={addressBooksEntries} i={i} />
               :
               <></>
             }
