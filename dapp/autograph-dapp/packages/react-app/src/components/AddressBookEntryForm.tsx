@@ -37,8 +37,18 @@ const AddressBookFormEntry = ({onSubmit}: AddressBookFormEntryProps) => {
             </FlexAlignCenter>
             <FlexAlignCenter>
                 <Label>Tipology:</Label>
-                <Selector onClick={_ => setTipology(0)} isSelected={tipology=== 0}>😁</Selector>
-                <Selector onClick={_ => setTipology(1)} isSelected={tipology=== 1}>📄</Selector>
+                <Selector
+                    onClick={e => {
+                        e.preventDefault();
+                        setTipology(0);
+                    }} 
+                    isSelected={tipology=== 0}>😁</Selector>
+                <Selector
+                    onClick={e => {
+                        e.preventDefault();
+                        setTipology(1);
+                    }}
+                    isSelected={tipology=== 1}>📄</Selector>
             </FlexAlignCenter>
                 <Label>Labels</Label>
                 <LabelList list={labels} editable={true} onChange={setLabels}></LabelList>

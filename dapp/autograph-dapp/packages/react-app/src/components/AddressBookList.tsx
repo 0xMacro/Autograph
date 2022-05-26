@@ -19,7 +19,7 @@ interface IAddressBooksToggle {
 }
 
 interface IAddressBooksEntries {
-  [key: number]: IAddressBook.EntryStructOutput[];
+  [key: number]: IAddressBook.EntryStruct[];
 }
 
 const AddressBookList = ({IAddressBookFactory, account, signer}: AddressBookListProps) => {
@@ -55,12 +55,13 @@ const AddressBookList = ({IAddressBookFactory, account, signer}: AddressBookList
     }
 
     const pushEntry = (i: number, entry: IAddressBook.EntryStruct) => {
-      let copy:IAddressBooksEntries = {...addressBooksEntries};
-      copy[i].push(entry as IAddressBook.EntryStructOutput);
-      setAddressBooksEntries(copy);
+      let newAddressBooks = {...addressBooksEntries};
+      let copy = [...newAddressBooks[i], entry]; 
+      newAddressBooks[i] = copy;
+      setAddressBooksEntries(newAddressBooks);
     }
 
-    const updateEntries = (i: number, entries: IAddressBook.EntryStructOutput[]) => {
+    const updateEntries = (i: number, entries: IAddressBook.EntryStruct[]) => {
       let copy:IAddressBooksEntries = {...addressBooksEntries};
       copy[i] = entries;
       setAddressBooksEntries(copy);

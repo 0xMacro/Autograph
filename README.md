@@ -2,7 +2,11 @@
 
 The autograph is a simple address book contract that allows you to manage address books of your favorites addresses.
 
-
+V3
+AutographAddressBook
+Deployer: 0xfc5e9ba650550de8be9a0f995ee9bf2d530cddbe
+Deployed to: [0x1ebc0e2e72c6bf75b08bc26da2316b4b2d0a6390](https://goerli.etherscan.io/address/0x1ebc0e2e72c6bf75b08bc26da2316b4b2d0a6390)
+Transaction hash: [0x47ce037fa934bfc2d58ce87a2925f953d9d3fbcefe36b7a79c803c93f0357bba](https://goerli.etherscan.io/tx/0x47ce037fa934bfc2d58ce87a2925f953d9d3fbcefe36b7a79c803c93f0357bba)
 
 V2
 AutographAddressBook

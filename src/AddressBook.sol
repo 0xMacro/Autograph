@@ -122,7 +122,7 @@ contract AddressBook is IAddressBook, StrictOwnable {
         if (index != lastIndex) {
             entries[index] = entries[lastIndex];
         }
-        delete entries[lastIndex];
+        entries.pop();
 
         emit EntryDeleted(address(this), index, entry);
     }

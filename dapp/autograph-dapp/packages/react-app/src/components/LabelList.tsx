@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useEthers } from '@usedapp/core';
 import { Label, Button, FlexAlignCenter, ListContainer, ListItem, Input } from ".";
-import { AddressBookFactory } from '../types';
 
 
 interface LabelListProps {

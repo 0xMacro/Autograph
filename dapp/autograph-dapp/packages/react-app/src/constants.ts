@@ -1,7 +1,7 @@
 import { ChainId } from "@usedapp/core";
 
 export const ADDRESS_BOOK_FACTORY_ADDRESSES = {
-    [ChainId.Goerli.valueOf()]: '0x819110f8e51d2b45dd4c380b0c962088cbcf5ed0',
+    [ChainId.Goerli.valueOf()]: '0x1ebc0e2e72c6bf75b08bc26da2316b4b2d0a6390',
 };
 
 export const SUBSCRIPTIONS_ADDRESSES = {
