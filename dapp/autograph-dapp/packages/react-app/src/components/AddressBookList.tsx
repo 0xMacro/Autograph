@@ -1,40 +1,31 @@
 import { useEffect, useState } from 'react';
 import Entries from './Entries';
-import { useEthers } from '@usedapp/core';
-import { ItemContainer, Item } from ".";
-import { AddressBookFactory, AddressBook__factory, } from '../types';
-
+import { ItemContainer, Item, Button } from ".";
+import Popup from 'reactjs-popup';
+import { AddressBookFactory, AddressBook__factory } from '../types';
+import { Signer } from 'ethers';
+import AddressBookEntryForm from './AddressBookEntryForm';
+import { IAddressBook } from '../types/AddressBook';
 
 
 interface AddressBookListProps {
-    IAddressBookFactory: AddressBookFactory;
-    library: any;
-    chainId: number | undefined;
+  IAddressBookFactory: AddressBookFactory;
+  account: string;
+  signer: Signer;
 };
 
 interface IAddressBooksToggle {
   [key: number]: boolean;
 }
 
-type getEntriesOutput = [string, number, string, string[]] & {
-  name: string;
-  tipology: number;
-  entryAddress: string;
-  labels: string[];
-};
-
 interface IAddressBooksEntries {
-  [key: number]: getEntriesOutput[];
+  [key: number]: IAddressBook.EntryStructOutput[];
 }
 
-
-
-
-const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookListProps) => {
+const AddressBookList = ({IAddressBookFactory, account, signer}: AddressBookListProps) => {
     const [addressBooks, setAddressBooks] = useState<string[]>([]);
     const [addressBooksToggle, setAddressBooksToggle] = useState<IAddressBooksToggle>({});
     const [addressBooksEntries, setAddressBooksEntries] = useState<IAddressBooksEntries>({});
-    const { account } = useEthers();
 
     useEffect(() => {
         if (!account) return;
@@ -42,23 +33,37 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
 
     }, [account, IAddressBookFactory]);
 
-    function toggleAddressBook () {
-      
-    }
-
-    async function handleItemClick (addressBook: string, i: number) {
+    const handleItemClick = async (addressBook: string, i: number) => {
       let copy:IAddressBooksToggle = {...addressBooksToggle}
       await getEntries(addressBook, i)
-      copy[i] === undefined ? copy[i] = true : copy[i] = !copy[i]
+      copy[i] = copy[i] === undefined ? true : !copy[i];
       setAddressBooksToggle(copy)
     }
+
+    const onFormSubmitted = async (addressBook: string, i: number, entry: IAddressBook.EntryStruct, close: () => void) => {
+      const contract = AddressBook__factory.connect(addressBook, signer);
+      contract.addEntry(entry.name, entry.tipology, entry.entryAddress, entry.labels).then(() => {
+        pushEntry(i, entry);
+        close();
+      });
+    }
     
-    async function getEntries (addressBook: string, i: number) {
-      const IAddressBook = AddressBook__factory.connect(addressBook, library!);
-      const entries:getEntriesOutput[] = await IAddressBook.getEntries()
-      let copy:IAddressBooksEntries = {...addressBooksEntries}
-      copy[i] = entries
-      setAddressBooksEntries(copy)
+    const getEntries = async (addressBook: string, i: number) => {
+      const contract = AddressBook__factory.connect(addressBook, signer);
+      const entries = await contract.getEntries();
+      updateEntries(i, entries);
+    }
+
+    const pushEntry = (i: number, entry: IAddressBook.EntryStruct) => {
+      let copy:IAddressBooksEntries = {...addressBooksEntries};
+      copy[i].push(entry as IAddressBook.EntryStructOutput);
+      setAddressBooksEntries(copy);
+    }
+
+    const updateEntries = (i: number, entries: IAddressBook.EntryStructOutput[]) => {
+      let copy:IAddressBooksEntries = {...addressBooksEntries};
+      copy[i] = entries;
+      setAddressBooksEntries(copy);
     }
 
 
@@ -66,12 +71,23 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
         <>{
         addressBooks.map((addressBook, i) => (
           <ItemContainer key={addressBook}>
-            <Item onClick={() => {handleItemClick(addressBook, i)}}>{addressBook}</Item>
+            <Item>
+              {addressBook}
+              <Button onClick={() => {handleItemClick(addressBook, i)}}>{addressBooksToggle[i] ? 'Hide' : 'Show'}</Button>
+              <Popup
+                trigger={<Button>➕</Button>}
+                modal
+                closeOnDocumentClick
+              >
+                {(close: () => void) => (
+                    <AddressBookEntryForm onSubmit={(entry) => {
+                      onFormSubmitted(addressBook, i, entry, close);
+                    }}></AddressBookEntryForm>
+                )}
+              </Popup>
+            </Item>
             {
-              addressBooksToggle[i] ?
-              <Entries addressBooksEntries={addressBooksEntries} i={i} />
-              :
-              <></>
+              addressBooksToggle[i] && <Entries addressBooksEntries={addressBooksEntries[i]} />
             }
           </ItemContainer>
         ))

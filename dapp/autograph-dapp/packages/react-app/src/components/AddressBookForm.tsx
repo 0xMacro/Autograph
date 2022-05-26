@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEthers } from '@usedapp/core';
-import { Label, Input } from ".";
+import { Label, Button, FlexAlignCenter } from ".";
 import { AddressBookFactory } from '../types';
 
 
@@ -18,7 +18,6 @@ interface AddressBookCreateForm extends HTMLFormElement {
 }
 
 const AddressBookForm = ({IAddressBookFactory}: AddressBookFormProps) => {
-    const [name, setName] = useState<string>('');
     const { account, library } = useEthers();
 
     const handleSubmit = async (e: React.FormEvent<AddressBookCreateForm>) => {
@@ -29,11 +28,12 @@ const AddressBookForm = ({IAddressBookFactory}: AddressBookFormProps) => {
     }
     
     return (
-        <form onSubmit={handleSubmit}>
-            <Label>Add new address book:</Label>
-            <Input type="text" value={name} onChange={e => setName(e.target.value)}></Input>
-            <button type="submit">Add</button>
-        </form>
+        <FlexAlignCenter>
+            <Label>Address Books</Label>
+            <form onSubmit={handleSubmit}>
+                <Button type="submit">Create new one</Button>
+            </form>
+        </FlexAlignCenter>
     )
 };
 

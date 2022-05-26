@@ -1,10 +1,6 @@
 import React from 'react';
 import {ListContainer, ListItem, Link, Flex, FlexAlignCenter, Label, Indent } from ".";
 
-interface IAddressBooksEntries {
-    [key: number]: getEntriesOutput[];
-}
-
 type getEntriesOutput = [string, number, string, string[]] & {
     name: string;
     tipology: number;
@@ -13,17 +9,17 @@ type getEntriesOutput = [string, number, string, string[]] & {
 };
 
 interface EntriesProps {
-    addressBooksEntries: IAddressBooksEntries;
-    i: number;
+    addressBooksEntries: getEntriesOutput[];
 }
 
 const flexGrowStyle = {flexGrow: 1, flexBasis: 0}
 
-function Entries ({addressBooksEntries, i}: EntriesProps) {
+function Entries ({addressBooksEntries}: EntriesProps) {
 
     return (
         <ListContainer>
-            {addressBooksEntries[i].map((list) => (
+            {addressBooksEntries.length === 0 && "No Entries"}
+            {addressBooksEntries.map((list) => (
                 <ListItem key={'entry' + list[0]}>
                     <FlexAlignCenter style={flexGrowStyle}>
                         <Indent />

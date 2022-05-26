@@ -10,18 +10,30 @@ export const Body = styled.div`
   margin-top: 40px;
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+  small?: boolean;
+  borderless?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   background-color: white;
-  border: none;
-  border-radius: 8px;
+  border: ${p => p.borderless ? '0px' : '1px solid gray'};
+  border-radius: ${p => p.borderless ? 'none' : '8px'};
   color: #282c34;
   cursor: pointer;
   font-size: 16px;
   margin: 0px 20px;
-  padding: 12px 24px;
+  padding: ${p => p.small ? '2px 4px' : '12px 24px'};
   text-align: center;
   text-decoration: none;
 `;
+
+interface SelectorProps {
+  isSelected: boolean;
+}
+export const Selector = styled(Button)<SelectorProps>`
+  background-color: ${props => props.isSelected ? 'gray' : 'dark-gray'};};
+`; 
 
 export const Container = styled.div`
   background-color: #282c34;
@@ -58,7 +70,6 @@ export const Item = styled.div`
   display: flex;
   justify-content: space-between;
   user-select: none;
-  cursor: pointer;
   `
 export const ItemContainer = styled.div`
   border: 1px solid white;
