@@ -16,7 +16,7 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  background-color: white;
+  background-color: ${p => p.borderless ? 'transparent' : 'white'};
   border: ${p => p.borderless ? '0px' : '1px solid gray'};
   border-radius: ${p => p.borderless ? 'none' : '8px'};
   color: #282c34;

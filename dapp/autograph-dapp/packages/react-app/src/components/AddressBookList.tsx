@@ -40,25 +40,35 @@ const AddressBookList = ({IAddressBookFactory, account, signer}: AddressBookList
       setAddressBooksToggle(copy)
     }
 
-    const onFormSubmitted = async (addressBook: string, i: number, entry: IAddressBook.EntryStruct, close: () => void) => {
+    const handleDelete = (addressBookIdx: number, itemIdx: number) => {
+      const contract = AddressBook__factory.connect(addressBooks[addressBookIdx], signer);
+      contract
+        .deleteEntry(itemIdx)
+        .then((ctx) => {
+          ctx
+            .wait(1)
+            .then(() =>{
+              getEntries(addressBooks[addressBookIdx], addressBookIdx)
+            })
+        })
+    }
+
+    const onFormSubmitted = (addressBook: string, i: number, entry: IAddressBook.EntryStruct, close: () => void) => {
       const contract = AddressBook__factory.connect(addressBook, signer);
-      contract.addEntry(entry.name, entry.tipology, entry.entryAddress, entry.labels).then(() => {
-        pushEntry(i, entry);
-        close();
-      });
+      close();
+      contract
+        .addEntry(entry.name, entry.tipology, entry.entryAddress, entry.labels)
+        .then((ctx) => {
+          ctx.wait(1).then(() => {
+            getEntries(addressBook, i)
+          })
+        })
     }
     
     const getEntries = async (addressBook: string, i: number) => {
       const contract = AddressBook__factory.connect(addressBook, signer);
       const entries = await contract.getEntries();
       updateEntries(i, entries);
-    }
-
-    const pushEntry = (i: number, entry: IAddressBook.EntryStruct) => {
-      let newAddressBooks = {...addressBooksEntries};
-      let copy = [...newAddressBooks[i], entry]; 
-      newAddressBooks[i] = copy;
-      setAddressBooksEntries(newAddressBooks);
     }
 
     const updateEntries = (i: number, entries: IAddressBook.EntryStruct[]) => {
@@ -88,7 +98,9 @@ const AddressBookList = ({IAddressBookFactory, account, signer}: AddressBookList
               </Popup>
             </Item>
             {
-              addressBooksToggle[i] && <Entries addressBooksEntries={addressBooksEntries[i]} />
+              addressBooksToggle[i] && <Entries addressBooksEntries={addressBooksEntries[i]} onDelete={(itemIdx) => {
+                handleDelete(i, itemIdx);
+              }} />
             }
           </ItemContainer>
         ))
