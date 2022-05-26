@@ -57,6 +57,8 @@ export const Link = styled.a.attrs({
 export const Item = styled.div`
   display: flex;
   justify-content: space-between;
+  user-select: none;
+  cursor: pointer;
   `
 export const ItemContainer = styled.div`
   border: 1px solid white;

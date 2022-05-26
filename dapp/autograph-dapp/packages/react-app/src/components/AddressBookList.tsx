@@ -47,9 +47,9 @@ const AddressBookList = ({IAddressBookFactory, library, chainId}: AddressBookLis
     }
 
     async function handleItemClick (addressBook: string, i: number) {
-      let copy:IAddressBooksToggle = {...toggleAddressBook}
+      let copy:IAddressBooksToggle = {...addressBooksToggle}
       await getEntries(addressBook, i)
-      copy[i] = !copy[i]
+      copy[i] === undefined ? copy[i] = true : copy[i] = !copy[i]
       setAddressBooksToggle(copy)
     }
     
