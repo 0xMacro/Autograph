@@ -36,7 +36,7 @@ export const Header = styled.header`
   color: white;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 70px;
 `;
 
@@ -57,6 +57,8 @@ export const Link = styled.a.attrs({
 export const Item = styled.div`
   display: flex;
   justify-content: space-between;
+  user-select: none;
+  cursor: pointer;
   `
 export const ItemContainer = styled.div`
   border: 1px solid white;
@@ -64,6 +66,7 @@ export const ItemContainer = styled.div`
   width: 90vw;
   max-width: 900px;
   padding: 10px;
+  margin-top: 20px;
 `
 export const ListContainer = styled.div`
   margin: 10px 10px 10px 50px;
@@ -71,14 +74,19 @@ export const ListContainer = styled.div`
 export const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 10px 10px 10px 50px;
+  margin: 10px;
 `
 export const ListItem = styled.div`
   display: flex;
   justify-content: space-between;
   `
+
 export const Flex = styled.div`
   display: flex;
+`
+export const FlexAlignCenter = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 export const Label = styled.div`
@@ -86,4 +94,17 @@ export const Label = styled.div`
 `
 
 export const Input = styled.input`
+`
+
+export const Title = styled.h1`
+  text-align: left;
+  padding: 12px 24px;
+`
+
+export const Indent = styled.div`
+    width: 30px;
+    height: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
 `
